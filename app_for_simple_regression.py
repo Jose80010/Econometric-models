@@ -7,50 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1VbDNs7DU6GZHc2YjwdNDcrZwR2MKassd
 """
 
-# prompt: create an example for the TeslaStockPrice linear simple regression
-
-import pandas as pd
-#import statsmodels.api as sm
-
-# Hypothetical data for demonstration
-data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
-        'EPS': [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]}
-df = pd.DataFrame(data)
-
-# Define dependent and independent variables
-y = df['TeslaStockPrice']
-X = df['EPS']
-
-# Add a constant to the independent variable (for the intercept)
-X = sm.add_constant(X)
-
-# Fit the simple linear regression model
-model = sm.OLS(y, X).fit()
-
-# Print the regression results
-print(model.summary())
-
-# You can also access individual parameters and statistics
-print(f"\nIntercept (beta_0): {model.params['const']:.2f}")
-print(f"Slope (beta_1): {model.params['EPS']:.2f}")
-print(f"R-squared: {model.rsquared:.2f}")
-
-"""Interpretation of the intercept and slope
-
-Based on the output of the `model.summary()` and the individual parameter print statements:
-
-*   **Intercept ($\beta_0$)**: This is represented by `model.params['const']`. It is the predicted value of the dependent variable (TeslaStockPrice) when the independent variable (EPS) is zero. In this specific output:
-    *   The intercept is approximately `100.00`.
-    *   This means that, according to this model, when the Earnings Per Share (EPS) of Tesla is 0, the expected Tesla Stock Price is \$100.00.
-
-*   **Slope ($\beta_1$)**: This is represented by `model.params['EPS']`. It is the average change in the dependent variable (TeslaStockPrice) for a one-unit increase in the independent variable (EPS), holding other variables constant (in this simple regression, there are no other variables). In this specific output:
-    *   The slope is approximately `10.00`.
-    *   This means that, according to this model, for every one-unit increase in Tesla's Earnings Per Share (EPS), the expected Tesla Stock Price is predicted to increase by \$10.00.
-"""
-
-# prompt: create a streamlit app for this linear regression to plot this equation and manipulate the slope and intercept using widgets
-
-#!pip install streamlit plotly pandas statsmodels
 
 import streamlit as st
 import pandas as pd
