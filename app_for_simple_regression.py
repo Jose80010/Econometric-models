@@ -10,7 +10,7 @@ Original file is located at
 # prompt: create an example for the TeslaStockPrice linear simple regression
 
 import pandas as pd
-import statsmodels.api as sm
+#import statsmodels.api as sm
 
 # Hypothetical data for demonstration
 data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
