@@ -32,13 +32,13 @@ questions = [
         "answer": "C) Stock price"
     },
     {
-        "question": "3. In the equation StockPriceᵢ = β₀ + β₁·EPSᵢ + uᵢ, what does β₁ represent?",
+        "question": "3. In the equation StockPrice = β₀ + β₁·EPS + u, what does β₁ represent?",
         "options": ["A) The average stock price", "B) The rate of inflation",
                     "C) The effect of a one-unit change in EPS on stock price", "D) The error in the model"],
         "answer": "C) The effect of a one-unit change in EPS on stock price"
     },
     {
-        "question": "4. What does the error term uᵢ in a regression equation represent?",
+        "question": "4. What does the error term u in a regression equation represent?",
         "options": ["A) A mathematical mistake", "B) The explanatory variable",
                     "C) Factors not included in the model that affect the dependent variable", "D) Random numbers added for balance"],
         "answer": "C) Factors not included in the model that affect the dependent variable"
@@ -50,9 +50,9 @@ questions = [
         "answer": "B) It can account for multiple factors that affect the outcome"
     },
     {
-        "question": "6. In the equation StockReturnᵢ = β₀ + β₁·MarketReturnᵢ + β₂·Sizeᵢ + β₃·DebtRatioᵢ + uᵢ, which variable is NOT an explanatory variable?",
-        "options": ["A) Sizeᵢ", "B) StockReturnᵢ", "C) MarketReturnᵢ", "D) DebtRatioᵢ"],
-        "answer": "B) StockReturnᵢ"
+        "question": "6. In the equation StockReturn = β₀ + β₁·MarketReturn + β₂·Size + β₃·DebtRatio + u, which variable is NOT an explanatory variable?",
+        "options": ["A) Size", "B) StockReturn", "C) MarketReturn", "D) DebtRatio"],
+        "answer": "B) StockReturn"
     },
     {
         "question": "7. What does a positive value for β₃ in the previous model suggest about debt ratio and stock return?",
