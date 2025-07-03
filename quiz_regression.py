@@ -9,7 +9,7 @@ Original file is located at
 
 # prompt: install streamlit
 
-!pip install streamlit -q
+#!pip install streamlit -q
 
 import streamlit as st
 
