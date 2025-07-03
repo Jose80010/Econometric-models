@@ -1,2 +1,1 @@
 streamlit
-statsmodels.api as sm
