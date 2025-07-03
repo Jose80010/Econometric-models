@@ -7,46 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1VbDNs7DU6GZHc2YjwdNDcrZwR2MKassd
 """
 
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-import numpy as np
-
-
-# Hypothetical data for demonstration
-data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
-        'EPS': [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]}
-df = pd.DataFrame(data)
-
-# Define dependent and independent variables
-y = df['TeslaStockPrice']
-X = df[['EPS']] # sklearn expects a 2D array for features
-
-# Fit the simple linear regression model
-model = LinearRegression()
-model.fit(X, y)
-
-# Print the regression results
-# sklearn doesn't have a direct summary() like statsmodels,
-# so we'll print key statistics manually.
-
-print("Linear Regression Results (using scikit-learn)")
-print("-" * 40)
-print(f"Intercept (beta_0): {model.intercept_:.2f}")
-print(f"Slope (beta_1): {model.coef_[0]:.2f}")
-
-# Calculate R-squared manually or use model.score()
-# Note: model.score() is equivalent to R^2 for linear regression
-r_squared = model.score(X, y)
-print(f"R-squared: {r_squared:.2f}")
-
-# Other statistics like p-values and standard errors are not directly available
-# from the basic LinearRegression model in sklearn. For those, you'd typically
-# use statsmodels or other libraries designed for statistical inference.
-
-# You can make predictions with the trained model
-# prediction = model.predict([[8.0]]) # Example prediction for EPS = 8.0
-# print(f"Predicted Price for EPS 8.0: {prediction[0]:.2f}")
-
 
 import streamlit as st
 import matplotlib.pyplot as plt
