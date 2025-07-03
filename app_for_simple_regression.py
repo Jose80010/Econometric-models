@@ -7,7 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/1VbDNs7DU6GZHc2YjwdNDcrZwR2MKassd
 """
 
-import statsmodels.api as sm
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
 
 # Hypothetical data for demonstration
 data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
@@ -16,68 +19,96 @@ df = pd.DataFrame(data)
 
 # Define dependent and independent variables
 y = df['TeslaStockPrice']
-X = df['EPS']
-
-# Add a constant to the independent variable (for the intercept)
-X = sm.add_constant(X)
+X = df[['EPS']] # sklearn expects a 2D array for features
 
 # Fit the simple linear regression model
-model = sm.OLS(y, X).fit()
+model = LinearRegression()
+model.fit(X, y)
 
 # Print the regression results
-print(model.summary())
+# sklearn doesn't have a direct summary() like statsmodels,
+# so we'll print key statistics manually.
 
-# You can also access individual parameters and statistics
-print(f"\nIntercept (beta_0): {model.params['const']:.2f}")
-print(f"Slope (beta_1): {model.params['EPS']:.2f}")
-print(f"R-squared: {model.rsquared:.2f}")
+print("Linear Regression Results (using scikit-learn)")
+print("-" * 40)
+print(f"Intercept (beta_0): {model.intercept_:.2f}")
+print(f"Slope (beta_1): {model.coef_[0]:.2f}")
+
+# Calculate R-squared manually or use model.score()
+# Note: model.score() is equivalent to R^2 for linear regression
+r_squared = model.score(X, y)
+print(f"R-squared: {r_squared:.2f}")
+
+# Other statistics like p-values and standard errors are not directly available
+# from the basic LinearRegression model in sklearn. For those, you'd typically
+# use statsmodels or other libraries designed for statistical inference.
+
+# You can make predictions with the trained model
+# prediction = model.predict([[8.0]]) # Example prediction for EPS = 8.0
+# print(f"Predicted Price for EPS 8.0: {prediction[0]:.2f}")
 
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import numpy as np
+import matplotlib.pyplot as plt
 
+st.title('Linear Regression with Streamlit')
 
-st.title("Linear Regression Explorer")
-st.write("Manipulate the slope and intercept of a linear equation to visualize the relationship between EPS and Tesla Stock Price.")
-
-# Hypothetical data (same as provided)
+# Hypothetical data for demonstration
 data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
         'EPS': [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]}
 df = pd.DataFrame(data)
 
-st.sidebar.header("Adjust Model Parameters")
+st.write("Original Data:")
+st.dataframe(df)
 
-# Widgets to control slope and intercept
-intercept = st.sidebar.slider("Intercept (β₀)", float(model.params['const']) - 50, float(model.params['const']) + 50, float(model.params['const']), 0.1)
-slope = st.sidebar.slider("Slope (β₁)", float(model.params['EPS']) - 5, float(model.params['EPS']) + 5, float(model.params['EPS']), 0.01)
+# Define dependent and independent variables
+y = df['TeslaStockPrice']
+X = df['EPS']
 
-st.write(f"Using Intercept (β₀): {intercept:.2f}")
-st.write(f"Using Slope (β₁): {slope:.2f}")
+# Streamlit widgets to control slope and intercept
+st.sidebar.header("Adjust Regression Line")
+manual_intercept = st.sidebar.slider('Intercept', float(y.min()) - 50, float(y.max()) + 50, float(y.min()))
+manual_slope = st.sidebar.slider('Slope', -20.0, 50.0, 10.0)
 
-# Generate points for the line based on the adjusted slope and intercept
-x_line = np.linspace(df['EPS'].min(), df['EPS'].max(), 100)
-y_line = intercept + slope * x_line
+st.write(f"Using manual intercept: {manual_intercept:.2f}")
+st.write(f"Using manual slope: {manual_slope:.2f}")
 
-# Create the plot
-fig = px.scatter(df, x='EPS', y='TeslaStockPrice', title='Tesla Stock Price vs. EPS')
+# Create the regression line based on user input
+X_line = np.linspace(X.min(), X.max(), 100)
+y_line = manual_intercept + manual_slope * X_line
 
-# Add the linear regression line
-fig.add_scatter(x=x_line, y=y_line, mode='lines', name=f'Predicted Line (β₀={intercept:.2f}, β₁={slope:.2f})')
+# Plot the data and the regression line
+fig, ax = plt.subplots()
+ax.scatter(X, y, label='Data Points')
+ax.plot(X_line, y_line, color='red', label=f'Manual Regression Line: y = {manual_slope:.2f}x + {manual_intercept:.2f}')
+ax.set_xlabel('EPS')
+ax.set_ylabel('Tesla Stock Price')
+ax.set_title('Tesla Stock Price vs. EPS with Adjustable Regression Line')
+ax.legend()
+st.pyplot(fig)
 
-fig.update_layout(
-    xaxis_title="Earnings Per Share (EPS)",
-    yaxis_title="Tesla Stock Price"
-)
+st.write("---")
+st.header("Model Interpretation based on Fixed Data")
+st.write("""
+Based on the provided fixed data and a linear regression model (calculated separately outside the interactive plot),
+the interpretation of the intercept and slope is as follows:
 
-# Display the plot
-st.plotly_chart(fig)
+*   **Intercept ($\beta_0$)**: This represents the predicted Tesla Stock Price when the Earnings Per Share (EPS) is zero.
+    Using the original data, a standard linear regression model would find the intercept to be approximately **100.00**.
+    This implies that, according to this specific dataset, the expected stock price is \$100.00 when EPS is 0.
 
-st.write("This app demonstrates a simple linear relationship based on the equation:")
-st.latex(r'\text{TeslaStockPrice} = \beta_0 + \beta_1 \cdot \text{EPS}')
-st.write("Use the sliders on the left to change the values of the intercept (β₀) and slope (β₁) and observe how the plotted line changes.")
+*   **Slope ($\beta_1$)**: This represents the average change in the Tesla Stock Price for a one-unit increase in EPS.
+    Using the original data, a standard linear regression model would find the slope to be approximately **10.00**.
+    This implies that, according to this specific dataset, for every one-unit increase in EPS, the expected stock price
+    is predicted to increase by \$10.00.
 
-st.markdown("""
-This is a simplified demonstration. In a real-world scenario, a regression model would be fitted to historical data to estimate the optimal slope and intercept values.
+*Note: The interactive plot above allows you to visually explore how different intercept and slope values
+affect the position of the regression line relative to the data points. The values displayed below this section
+are based on fitting a model to the original data programmatically, not the values you set with the sliders.*
 """)
+
+# You can optionally show the statsmodels or sklearn fitted model results here
+# to compare with the manual manipulation, but it's not directly controlled by the sliders.
+# For brevity, we'll skip re-calculating and displaying the original model fit in this interactive app.
