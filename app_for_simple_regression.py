@@ -7,66 +7,35 @@ Original file is located at
     https://colab.research.google.com/drive/1VbDNs7DU6GZHc2YjwdNDcrZwR2MKassd
 """
 
-
 import streamlit as st
+import numpy as np
 import matplotlib.pyplot as plt
 
-st.title('Linear Regression with Streamlit')
+st.title('Simple Linear Regression with Interactive Widgets')
 
-# Hypothetical data for demonstration
-data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
-        'EPS': [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]}
-df = pd.DataFrame(data)
+# Generate some sample data
+np.random.seed(42)
+X = 2 * np.random.rand(100, 1)
+y = 4 + 3 * X + np.random.randn(100, 1)
 
-st.write("Original Data:")
-st.dataframe(df)
+st.write("This app demonstrates simple linear regression. You can adjust the intercept and slope using the sliders below to see how the regression line changes.")
 
-# Define dependent and independent variables
-y = df['TeslaStockPrice']
-X = df['EPS']
+# Create interactive widgets for intercept and slope
+st.sidebar.header('Model Parameters')
+intercept = st.sidebar.slider('Intercept', -10.0, 10.0, 4.0, 0.1)
+slope = st.sidebar.slider('Slope', -10.0, 10.0, 3.0, 0.1)
 
-# Streamlit widgets to control slope and intercept
-st.sidebar.header("Adjust Regression Line")
-manual_intercept = st.sidebar.slider('Intercept', float(y.min()) - 50, float(y.max()) + 50, float(y.min()))
-manual_slope = st.sidebar.slider('Slope', -20.0, 50.0, 10.0)
+# Calculate the predicted y values based on the current intercept and slope
+y_pred = intercept + slope * X
 
-st.write(f"Using manual intercept: {manual_intercept:.2f}")
-st.write(f"Using manual slope: {manual_slope:.2f}")
-
-# Create the regression line based on user input
-X_line = np.linspace(X.min(), X.max(), 100)
-y_line = manual_intercept + manual_slope * X_line
-
-# Plot the data and the regression line
+# Plot the data points and the regression line
 fig, ax = plt.subplots()
 ax.scatter(X, y, label='Data Points')
-ax.plot(X_line, y_line, color='red', label=f'Manual Regression Line: y = {manual_slope:.2f}x + {manual_intercept:.2f}')
-ax.set_xlabel('EPS')
-ax.set_ylabel('Tesla Stock Price')
-ax.set_title('Tesla Stock Price vs. EPS with Adjustable Regression Line')
+ax.plot(X, y_pred, color='red', label='Regression Line')
+ax.set_xlabel('X')
+ax.set_ylabel('y')
+ax.set_title('Simple Linear Regression')
 ax.legend()
 st.pyplot(fig)
 
-st.write("---")
-st.header("Model Interpretation based on Fixed Data")
-st.write("""
-Based on the provided fixed data and a linear regression model (calculated separately outside the interactive plot),
-the interpretation of the intercept and slope is as follows:
-
-*   **Intercept ($\beta_0$)**: This represents the predicted Tesla Stock Price when the Earnings Per Share (EPS) is zero.
-    Using the original data, a standard linear regression model would find the intercept to be approximately **100.00**.
-    This implies that, according to this specific dataset, the expected stock price is \$100.00 when EPS is 0.
-
-*   **Slope ($\beta_1$)**: This represents the average change in the Tesla Stock Price for a one-unit increase in EPS.
-    Using the original data, a standard linear regression model would find the slope to be approximately **10.00**.
-    This implies that, according to this specific dataset, for every one-unit increase in EPS, the expected stock price
-    is predicted to increase by \$10.00.
-
-*Note: The interactive plot above allows you to visually explore how different intercept and slope values
-affect the position of the regression line relative to the data points. The values displayed below this section
-are based on fitting a model to the original data programmatically, not the values you set with the sliders.*
-""")
-
-# You can optionally show the statsmodels or sklearn fitted model results here
-# to compare with the manual manipulation, but it's not directly controlled by the sliders.
-# For brevity, we'll skip re-calculating and displaying the original model fit in this interactive app.
+st.write("The red line represents the regression line with the selected intercept and slope.")
