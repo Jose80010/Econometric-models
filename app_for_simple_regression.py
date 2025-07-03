@@ -50,7 +50,7 @@ Based on the output of the `model.summary()` and the individual parameter print 
 
 # prompt: create a streamlit app for this linear regression to plot this equation and manipulate the slope and intercept using widgets
 
-!pip install streamlit plotly pandas statsmodels
+#!pip install streamlit plotly pandas statsmodels
 
 import streamlit as st
 import pandas as pd
