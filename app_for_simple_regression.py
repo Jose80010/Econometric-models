@@ -12,12 +12,6 @@ import matplotlib.pyplot as plt
 
 
 
-
-
-
-
-
-
 st.title("📈 Linear Regression Interactive Plot")
 
 # Generate sample data
@@ -45,9 +39,11 @@ ax.set_ylabel("Y")
 ax.legend()
 ax.grid(True)
 
-# Add lines for the axes crossing
-ax.axhline(0, color='grey', lw=0.5)
-ax.axvline(0, color='grey', lw=0.5)
+# Add lines for the axes crossing in black
+ax.axhline(0, color='black', lw=1)
+ax.axvline(0, color='black', lw=1)
+
+
 
 
 st.pyplot(fig)
