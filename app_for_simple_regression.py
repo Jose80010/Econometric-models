@@ -28,10 +28,6 @@ b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500
 #y_pred = m * x_data + b
 y_pred = m * np.array(x_data) + b
 
-# Interpretation of intercept and slope
-st.markdown("### 📊 Interpretation")
-st.write(f"**Intercept ( = {b:.2f}):** This is the predicted Tesla Stock Price when the EPS (Earnings Per Share) is 0.")
-st.write(f"**Slope ( = {m:.2f}):** This represents the estimated change in Tesla Stock Price for every one-unit increase in EPS.")
 
 # Plotting
 fig, ax = plt.subplots()
@@ -50,3 +46,7 @@ st.pyplot(fig)
 
 # Optional display of equation
 st.markdown(f"### 📌 Current Line Equation: `Tesla Stock Price = {m:.2f} * EPS + ({b:.2f})`")
+# Interpretation of intercept and slope
+st.markdown("### 📊 Interpretation")
+st.write(f"**Intercept ( = {b:.2f}):** This is the predicted Tesla Stock Price when the EPS (Earnings Per Share) is 0.")
+st.write(f"**Slope ( = {m:.2f}):** This represents the estimated change in Tesla Stock Price for every one-unit increase in EPS.")
