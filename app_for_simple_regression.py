@@ -17,26 +17,6 @@ true_intercept = 1.0
 y_data = [150, 160, 170, 180, 190, 200]
 st.dataframe(pd.DataFrame({'EPS': x_data, 'TeslaStockPrice': y_data}))
 
-st.header("📚 Interpretation")
-
-st.write("### Intercept ($\hat{β}_0$) Interpretation:")
-if b > 0:
-    st.write(f"When EPS is 0, the model predicts a Tesla Stock Price of approximately **{b:.2f}**.  However, interpreting the intercept in isolation can be misleading, especially if 0 is outside the range of observed EPS values.")
-elif b < 0:
-    st.write(f"When EPS is 0, the model predicts a Tesla Stock Price of approximately **{b:.2f}**.  A negative intercept might not be meaningful in this context, as stock prices are typically non-negative. It's important to consider if 0 is within the range of your data.")
-else:
-    st.write("When EPS is 0, the model predicts a Tesla Stock Price of approximately **0.00**. This suggests that without any EPS, the stock price is predicted to be zero, which might not be a realistic scenario.")
-
-
-st.write("### Slope ($\hat{β}_1$) Interpretation:")
-if m > 0:
-    st.write(f"For every one-unit increase in EPS, the model predicts an increase in the Tesla Stock Price of approximately **{m:.2f}**.")
-elif m < 0:
-    st.write(f"For every one-unit increase in EPS, the model predicts a decrease in the Tesla Stock Price of approximately **{m:.2f}**.")
-else:
-    st.write("The slope is **0.00**. This means the model predicts no change in Tesla Stock Price for a one-unit increase in EPS.")
-
-
 
 
 # Sidebar sliders for slope and intercept
@@ -48,6 +28,10 @@ b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500
 #y_pred = m * x_data + b
 y_pred = m * np.array(x_data) + b
 
+# Interpretation of intercept and slope
+st.markdown("### 📊 Interpretation")
+st.write(f"**Intercept ($\hat{β}_0$ = {b:.2f}):** This is the predicted Tesla Stock Price when the EPS (Earnings Per Share) is 0.")
+st.write(f"**Slope ($\hat{β}_1$ = {m:.2f}):** This represents the estimated change in Tesla Stock Price for every one-unit increase in EPS.")
 
 # Plotting
 fig, ax = plt.subplots()
