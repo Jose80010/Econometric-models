@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 
 
-st.title("📈 Linear Regression Interactive Plot")
+st.title("📈 Simple Linear Regression Interactive Plot")
 
 # Generate sample data
 np.random.seed(42)
