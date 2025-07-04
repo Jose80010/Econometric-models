@@ -52,8 +52,8 @@ y_pred = m * x_data + b
 fig, ax = plt.subplots()
 ax.scatter(x_data, y_data, label="Data", color='blue')
 ax.plot(x_data, y_pred, label=f"y = {m:.2f}x + {b:.2f}", color='red')
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
+ax.set_xlabel("EPS")
+ax.set_ylabel("TeslaStockPrice")
 ax.legend()
 ax.grid(True)
 
