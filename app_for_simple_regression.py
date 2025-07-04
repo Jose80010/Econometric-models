@@ -8,8 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
-
 st.title("📈 Simple Linear Regression Interactive Plot")
 st.write("Created by Dr Jose Islas")
 # Generate sample data
@@ -17,9 +15,7 @@ np.random.seed(42)
 x_data= [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]
 true_slope = 2.5
 true_intercept = 1.0
-
 y_data = [150, 160, 170, 180, 190, 200]
-
 st.dataframe(pd.DataFrame({'EPS': x_data, 'TeslaStockPrice': y_data}))
 
 
@@ -30,9 +26,6 @@ b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500
 
 # Calculate predicted y values
 y_pred = m * x_data + b
-
-
-
 
 
 # Plotting
