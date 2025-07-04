@@ -22,7 +22,7 @@ st.dataframe(pd.DataFrame({'EPS': x_data, 'TeslaStockPrice': y_data}))
 # Sidebar sliders for slope and intercept
 st.sidebar.header("🔧 Adjust Parameters")
 m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-100.0, max_value=100.0, value=10.0, step=0.1)
-b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500.0, value=0.0, step=5)
+b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500.0, value=0.0, step=0.1)
 
 # Calculate predicted y values
 #y_pred = m * x_data + b
