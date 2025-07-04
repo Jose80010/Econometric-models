@@ -49,5 +49,5 @@ ax.axvline(0, color='black', lw=1)
 st.pyplot(fig)
 
 # Optional display of equation
-st.markdown(f"### 📌 Current Line Equation: `y = {m:.2f}x + {b:.2f}`")
+st.markdown(f"### 📌 Current Line Equation: `y = {m:.2f}x + ({b:.2f})`")
 
