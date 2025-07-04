@@ -22,7 +22,7 @@ y_data = true_slope * x_data + true_intercept + noise
 
 # Sidebar sliders for slope and intercept
 st.sidebar.header("🔧 Adjust Parameters")
-m = st.sidebar.slider("Slope β₁=", min_value=-10.0, max_value=10.0, value=1.0, step=0.1)
+m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-10.0, max_value=10.0, value=1.0, step=0.1)
 b = st.sidebar.slider("Intercept β₀=", min_value=-10.0, max_value=10.0, value=0.0, step=0.1)
 
 # Calculate predicted y values
