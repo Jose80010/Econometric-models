@@ -15,7 +15,7 @@ x_data = df['EPS'].values
 y_data = df['TeslaStockPrice'].values
 
 #st.dataframe(df)
-st.dataframe(pd.DataFrame(df)
+st.dataframe(pd.DataFrame(df))
 # Sidebar sliders for slope and intercept
 st.sidebar.header("🔧 Adjust Parameters")
 m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-100.0, max_value=100.0, value=10.0, step=0.1)
