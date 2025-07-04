@@ -17,12 +17,13 @@ st.title("📈 Simple Linear Regression Interactive Plot")
 st.write("Created by Dr Jose Islas")
 # Generate sample data
 np.random.seed(42)
-x_data = np.linspace(-5, 10, 50) # Changed x_data range to include negative values
+#x_data = np.linspace(-5, 10, 50) # Changed x_data range to include negative values
+x_data = np.array([150, 160, 170, 180, 190, 200])
 true_slope = 2.5
 true_intercept = 1.0
-noise = np.random.normal(0, 2, size=x_data.shape)
-y_data = true_slope * x_data + true_intercept + noise
-
+#noise = np.random.normal(0, 2, size=x_data.shape)
+#y_data = true_slope * x_data + true_intercept + noise
+y_data = np.array([5.0, 5.5, 6.0,6.5, 7.0, 7.5, 200])
 
 
 # Hypothetical data for demonstration
