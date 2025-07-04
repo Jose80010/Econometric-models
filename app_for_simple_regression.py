@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.title("📈 Linear Regression Interactive Plot")
-
+st.sidebar.text("Created by Dr. Islas")
 # Generate sample data
 np.random.seed(42)
 x_data = np.linspace(0, 10, 50)
