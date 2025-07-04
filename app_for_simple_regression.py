@@ -46,9 +46,3 @@ st.pyplot(fig)
 
 # Optional display of equation
 st.markdown(f"### 📌 Current Line Equation: `Tesla Stock Price = {m:.2f} * EPS + ({b:.2f})`")
-
-
-
-
-
-
