@@ -25,7 +25,8 @@ m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-100.0, max_value=100.0, 
 b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500.0, value=0.0, step=0.1)
 
 # Calculate predicted y values
-y_pred = m * x_data + b
+#y_pred = m * x_data + b
+y_pred = m * np.array(x_data) + b
 
 
 # Plotting
