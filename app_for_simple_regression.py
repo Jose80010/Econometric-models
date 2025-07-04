@@ -23,7 +23,7 @@ true_slope = 2.5
 true_intercept = 1.0
 #noise = np.random.normal(0, 2, size=x_data.shape)
 #y_data = true_slope * x_data + true_intercept + noise
-y_data = np.array([5.0, 5.5, 6.0,6.5, 7.0, 7.5, 200])
+y_data = np.array([5.0, 5.5, 6.0,6.5, 7.0, 7.5])
 
 
 # Hypothetical data for demonstration
