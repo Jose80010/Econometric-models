@@ -8,52 +8,36 @@ Original file is located at
 """
 import streamlit as st
 import numpy as np
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 
-# Set page configuration
-st.set_page_config(page_title="Interactive Regression Plot", layout="centered")
-
-# Title and description
-st.title("Interactive Linear Regression Plot")
-st.write("Adjust the slope and intercept to see how the regression line changes.")
+st.title("📈 Linear Regression Interactive Plot")
 
 # Generate sample data
 np.random.seed(42)
-x = np.linspace(0, 10, 50)
-y = 2 * x + 1 + np.random.normal(0, 1, 50)
+x_data = np.linspace(0, 10, 50)
+true_slope = 2.5
+true_intercept = 1.0
+noise = np.random.normal(0, 2, size=x_data.shape)
+y_data = true_slope * x_data + true_intercept + noise
 
-# Create sliders for slope and intercept
-slope = st.slider("Slope", min_value=-5.0, max_value=5.0, value=2.0, step=0.1)
-intercept = st.slider("Intercept", min_value=-10.0, max_value=10.0, value=1.0, step=0.1)
+# Sidebar sliders for slope and intercept
+st.sidebar.header("🔧 Adjust Parameters")
+m = st.sidebar.slider("Slope (m)", min_value=-10.0, max_value=10.0, value=1.0, step=0.1)
+b = st.sidebar.slider("Intercept (b)", min_value=-10.0, max_value=10.0, value=0.0, step=0.1)
 
-# Calculate regression line
-y_pred = slope * x + intercept
+# Calculate predicted y values
+y_pred = m * x_data + b
 
-# Create Plotly figure
-fig = go.Figure()
+# Plotting
+fig, ax = plt.subplots()
+ax.scatter(x_data, y_data, label="Data", color='blue')
+ax.plot(x_data, y_pred, label=f"y = {m:.2f}x + {b:.2f}", color='red')
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.legend()
+ax.grid(True)
 
-# Add scatter plot of data points
-fig.add_trace(
-    go.Scatter(x=x, y=y, mode="markers", name="Data Points", marker=dict(size=8))
-)
+st.pyplot(fig)
 
-# Add regression line
-fig.add_trace(
-    go.Scatter(x=x, y=y_pred, mode="lines", name=f"y = {slope:.1f}x + {intercept:.1f}", line=dict(color="red"))
-)
-
-# Update layout
-fig.update_layout(
-    title="Linear Regression",
-    xaxis_title="X",
-    yaxis_title="Y",
-    showlegend=True,
-    width=600,
-    height=400
-)
-
-# Display plot
-st.plotly_chart(fig)
-
-# Display equation
-st.write(f"**Current Equation**: y = {slope:.1f}x + {intercept:.1f}")
+# Optional display of equation
+st.markdown(f"### 📌 Current Line Equation: `y = {m:.2f}x + {b:.2f}`")
