@@ -23,7 +23,22 @@ true_intercept = 1.0
 noise = np.random.normal(0, 2, size=x_data.shape)
 y_data = true_slope * x_data + true_intercept + noise
 
-st.dataframe(pd.DataFrame({'X': x_data, 'Y': y_data}))
+
+
+# Hypothetical data for demonstration
+#data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
+ #       'EPS': [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]}
+#df = pd.DataFrame(data)
+
+# Define dependent and independent variables
+#y = df['TeslaStockPrice']
+#X = df['EPS']
+
+
+
+
+
+st.dataframe(pd.DataFrame({'EPS': x_data, 'TeslaStockPrice': y_data}))
 
 # Sidebar sliders for slope and intercept
 st.sidebar.header("🔧 Adjust Parameters")
