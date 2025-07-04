@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 
 st.title("📈 Simple Linear Regression Interactive Plot")
-
+st.write("Created by Dr Jose Islas")
 # Generate sample data
 np.random.seed(42)
 x_data = np.linspace(-5, 10, 50) # Changed x_data range to include negative values
