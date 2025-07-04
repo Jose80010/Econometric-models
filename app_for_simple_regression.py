@@ -22,6 +22,8 @@ true_intercept = 1.0
 noise = np.random.normal(0, 2, size=x_data.shape)
 y_data = true_slope * x_data + true_intercept + noise
 
+st.dataframe(pd.DataFrame({'X': x_data, 'Y': y_data}))
+
 # Sidebar sliders for slope and intercept
 st.sidebar.header("🔧 Adjust Parameters")
 m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-10.0, max_value=10.0, value=1.0, step=0.1)
