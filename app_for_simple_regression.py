@@ -23,48 +23,6 @@ y_data = [150, 160, 170, 180, 190, 200]
 
 st.dataframe(pd.DataFrame({'EPS': x_data, 'TeslaStockPrice': y_data}))
 
-# Sidebar sliders for slope and intercept
-st.sidebar.header("🔧 Adjust Parameters")
-m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-10.0, max_value=10.0, value=1.0, step=0.1)
-b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-10.0, max_value=10.0, value=0.0, step=0.1)
-
-# Calculate predicted y values
-y_pred = m * x_data + b
-
-# Plotting
-fig, ax = plt.subplots()
-ax.scatter(x_data, y_data, label="Data", color='blue')
-ax.plot(x_data, y_pred, label=f"y = {m:.2f}x + {b:.2f}", color='red')
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.legend()
-ax.grid(True)
-
-# Add lines for the axes crossing in black
-ax.axhline(0, color='black', lw=1)
-ax.axvline(0, color='black', lw=1)
-
-
-
-
-st.pyplot(fig)
-
-# Optional display of equation
-st.markdown(f"### 📌 Current Line Equation: `y = {m:.2f}x + ({b:.2f})`")
-
-
-
-
-
-
-data = {'TeslaStockPrice': [150, 160, 170, 180, 190, 200],
-        'EPS': [5.0, 5.5, 6.0, 6.5, 7.0, 7.5]}
-
-df = pd.DataFrame(data)
-x_data = df['EPS'].values
-y_data = df['TeslaStockPrice'].values
-
-st.dataframe(df)
 
 # Sidebar sliders for slope and intercept
 st.sidebar.header("🔧 Adjust Parameters")
@@ -73,6 +31,10 @@ b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500
 
 # Calculate predicted y values
 y_pred = m * x_data + b
+
+
+
+
 
 # Plotting
 fig, ax = plt.subplots()
