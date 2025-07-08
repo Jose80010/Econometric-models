@@ -20,9 +20,26 @@ st.dataframe(pd.DataFrame({'EPS': x_data, 'TeslaStockPrice': y_data}))
 
 
 # Sidebar sliders for slope and intercept
+#st.sidebar.header("🔧 Adjust Parameters")
+#m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-100.0, max_value=100.0, value=10.0, step=0.1)
+#b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500.0, value=0.0, step=0.1)
+
+
+# Sidebar input for slope and intercept with numerical input as well
 st.sidebar.header("🔧 Adjust Parameters")
-m = st.sidebar.slider("Slope $\hat{β}_1=$", min_value=-100.0, max_value=100.0, value=10.0, step=0.1)
-b = st.sidebar.slider("Intercept $\hat{β}_0=$", min_value=-500.0, max_value=500.0, value=0.0, step=0.1)
+m_input = st.sidebar.text_input("Enter Slope $\hat{β}_1$:", value="10.0")
+b_input = st.sidebar.text_input("Enter Intercept $\hat{β}_0$:", value="0.0")
+
+try:
+    m = float(m_input)
+    b = float(b_input)
+except ValueError:
+    st.sidebar.error("Please enter valid numbers for Slope and Intercept.")
+    m = 10.0 # Default value if input is invalid
+    b = 0.0  # Default value if input is invalid
+
+
+
 
 # Calculate predicted y values
 #y_pred = m * x_data + b
