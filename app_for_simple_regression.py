@@ -30,13 +30,13 @@ st.sidebar.header("🔧 Adjust Parameters")
 m_input = st.sidebar.text_input("Enter Slope $\hat{β}_1$:", value="10.0")
 b_input = st.sidebar.text_input("Enter Intercept $\hat{β}_0$:", value="0.0")
 
-try:
-    m = float(m_input)
-    b = float(b_input)
-except ValueError:
-    st.sidebar.error("Please enter valid numbers for Slope and Intercept.")
-    m = 10.0 # Default value if input is invalid
-    b = 0.0  # Default value if input is invalid
+#try:
+#    m = float(m_input)
+#    b = float(b_input)
+#except ValueError:
+#    st.sidebar.error("Please enter valid numbers for Slope and Intercept.")
+#    m = 10.0 # Default value if input is invalid
+#    b = 0.0  # Default value if input is invalid
 
 
 
